@@ -65,7 +65,14 @@ jobs:
                 echo "$CONFIG=$(grep -w "$CONFIG" "$CONFIG_ENV" | head -n 1 | cut -d "=" -f 2)" >> $GITHUB_ENV
             fi
         done
-
+    - name: Print environment variables
+      run: |
+        echo "Value of KERNEL_SOURCE: ${{ env.KERNEL_SOURCE }}"
+        echo "Value of ARCH: ${{ env.ARCH }}"
+        echo "Value of USE_CUSTOM_ANYKERNEL3: ${{ env.USE_CUSTOM_ANYKERNEL3 }}"
+        # 打印所有环境变量
+        env
+    
     - name: Remove unused packages
       if: env.REMOVE_UNUSED_PACKAGES == 'true'
       uses: jlumbroso/free-disk-space@main
